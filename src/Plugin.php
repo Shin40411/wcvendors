@@ -30,6 +30,7 @@ class Plugin {
 		do_action( 'before_wcvendors_init' );
 
 		$this->load_textdomain();
+		$this->includes();
 		$this->init_hooks();
 		$this->init_classes();
 
@@ -84,10 +85,28 @@ class Plugin {
 	}
 
 	/**
-	 * Init frontend classes. 
+	 * Init frontend classes.
 	 */
-	private function init_frontend_classes(){ 
-		( new Front\Registration() )->init_hooks(); 
+	private function init_frontend_classes() {
+		( new Front\Registration() )->init_hooks();
+	}
+
+	/**
+	 * Include required functions files used outside of the class files.
+	 *
+	 * @return void
+	 */
+	private function includes() {
+
+		include_once WCV_PLUGIN_PATH . 'inc/core-functions.php';
+		include_once WCV_PLUGIN_PATH . 'inc/vendor-functions.php';
+
+		if ( $this->is_request( 'admin' ) ) {
+			include_once WCV_PLUGIN_PATH . 'inc/admin-functions.php';
+		}
+
+		include_once WCV_PLUGIN_PATH . 'inc/deprecated-functions.php';
+
 	}
 
 	/**
@@ -96,7 +115,7 @@ class Plugin {
 	 * @param array $data_stores WooCommerce Data store classes.
 	 *
 	 * @return mixed
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
 	public function add_data_stores( $data_stores ) {
 		$data_stores['shop-order-vendor'] = new DataStores\VendorOrder();
@@ -108,7 +127,8 @@ class Plugin {
 	/**
 	 * What type of request is this?
 	 *
-	 * @param  string $type admin, ajax, cron or frontend.
+	 * @param string $type admin, ajax, cron or frontend.
+	 *
 	 * @return bool
 	 */
 	private function is_request( $type ) {
@@ -137,7 +157,7 @@ class Plugin {
 	 * @param string $for View id.
 	 *
 	 * @return array
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
 	public function add_order_types( $order_types, $for ) {
 
