@@ -89,6 +89,7 @@ class Plugin {
 	 */
 	private function init_frontend_classes() {
 		( new Front\Registration() )->init_hooks();
+		( new Front\Cart() )->init_hooks();
 	}
 
 	/**
@@ -106,6 +107,7 @@ class Plugin {
 		}
 
 		include_once WCV_PLUGIN_PATH . 'inc/deprecated-functions.php';
+		include_once WCV_PLUGIN_PATH . 'inc/template-functions.php';
 
 	}
 

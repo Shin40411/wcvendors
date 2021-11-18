@@ -339,3 +339,30 @@ function wcv_get_avatar_url( $vendor_id ) {
 	$avatar_url = get_avatar_url( $vendor_id );
 	return apply_filters( 'wcvendors_get_avatar_url', $avatar_url, $vendor_id );
 }
+
+if ( ! function_exists( 'wcv_get_storeurl' ) ) {
+	/**
+	 * Retrieve the shop page for a specific vendor
+	 *
+	 * @param unknown $vendor_id
+	 *
+	 * @return string
+	 */
+	function wcv_get_storeurl( $vendor_id, $vendor_slug ) {
+
+		if ( ! wcv_is_vendor( $vendor_id ) ) {
+			return;
+		}
+
+		$slug   = ! $vendor_slug ? get_user_meta( $vendor_id, 'pv_shop_slug', true ) : $vendor_slug;
+		$vendor = ! $slug ? get_userdata( $vendor_id )->user_login : $slug;
+
+		if ( get_option( 'permalink_structure' ) ) {
+			$permalink = trailingslashit( get_option( 'wcvendors_vendor_shop_permalink' ) );
+
+			return trailingslashit( home_url( sprintf( '/%s%s', $permalink, $vendor ) ) );
+		} else {
+			return esc_url( add_query_arg( array( 'vendor_shop' => $vendor ), get_post_type_archive_link( 'product' ) ) );
+		}
+	}
+}

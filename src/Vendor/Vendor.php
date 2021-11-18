@@ -160,13 +160,13 @@ use WP_Query;
 
         // New Vendor, load defaults 
         if ( ! $this->id ){ 
-            $this->store_data = wcv_vendor_store_info_defaults(); 
+            $this->store_data = wcv_vendor_store_data_defaults(); 
             return;
         } 
 
         $store_data = get_user_meta( $this->get_id(), $this->get_meta_key(), true ); 
         $store_data = is_array( $store_data ) ? $store_data : array(); 
-        $store_data = wp_parse_args( $store_data, wcv_vendor_store_info_defaults() ); 
+        $store_data = wp_parse_args( $store_data, wcv_vendor_store_data_defaults() ); 
        
         $this->store_data = apply_filters( $this->get_hook_prefix() . '_store_data', $store_data, $this ); 
 
