@@ -361,6 +361,7 @@ if ( ! function_exists( 'wcv_get_storeurl' ) ) {
 	 *
 	 * @return string
 	 */
+
 	function wcv_get_storeurl( $vendor_id ) {
 
 		$vendor      = new Vendor( $vendor_id );
@@ -372,8 +373,10 @@ if ( ! function_exists( 'wcv_get_storeurl' ) ) {
 		$slug        = $vendor->get_slug();
 		$vendor_slug = ! $slug ? $vendor->get_wp_user()->user_login : $slug;
 
+
 		if ( get_option( 'permalink_structure' ) ) {
 			$permalink = trailingslashit( get_option( 'wcvendors_vendor_shop_permalink' ) );
+
 
 			return trailingslashit( home_url( sprintf( '/%s%s', $permalink, $vendor_slug ) ) );
 		} else {
@@ -456,3 +459,4 @@ if ( ! function_exists( 'wcv_get_prop_map') ) {
 	return apply_filters( 'wcvendors_prop_map', $prop_to_meta_map );
    }
 }
+
