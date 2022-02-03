@@ -7,7 +7,7 @@ class DownloadableproductadditionCest
         $I->amOnPage('/');
 		$I->click('My account');
 		$I->fillField('#username', 'vendor1');
-		$I->fillField('#password', '#*mr4Xk)R2l)W^XuI^P*85jP');
+		$I->fillField('#password', '#*mr4Xk)R2l)W^XuI^P85jP');
 		$I->click('#customer_login > div.u-column1.col-1 > form > p:nth-child(3) > button');
     }
 
@@ -29,9 +29,9 @@ class DownloadableproductadditionCest
 		$I->wait(5);
 		$I->fillField('#general_product_data > div.options_group.show_if_downloadable.hidden > div > table > tbody > tr > td.file_name > input.input_text', 'auto downloadable');
 		$I->fillField('#general_product_data > div.options_group.show_if_downloadable.hidden > div > table > tbody > tr > td.file_url > input', 'http://localhost/wordpress/wp-content/uploads/woocommerce_uploads/2021/03/wcv_commissions_sum-2021-Feb-11-3n6sds.csv'); // You will need to upload a file and change the path accroding to your local setup.
-		$I->scrollTo('#title');
+		$I->executeJS('window.scrollTo(0, 0)');
 		$I->doubleClick('#publish');
-		$I->scrollTo('#wpbody-content > div.wrap > h1');
+		$I->executeJS('window.scrollTo(0, 0)');
 		$I->see('Product published. View Product');
 		$I->click('View Product');
 		$I->see('ADP 1');
@@ -43,7 +43,6 @@ class DownloadableproductadditionCest
 		$I->click('Log in');
 		$I->fillField('#woocommerce-product-search-field-0', 'ADP 1');//searching for the product added by vendor.
 		$I->pressKey('#woocommerce-product-search-field-0', \Facebook\WebDriver\WebDriverKeys::ENTER);
-		$I->wait(5);
 		$I->scrollTo('#main > div:nth-child(2) > form > select');
 		$I->click('Add to cart');
 		$I->wait(10);
@@ -63,16 +62,16 @@ class DownloadableproductadditionCest
 		$I->scrollTo('#billing_email');
 		$I->fillField('#billing_email', 'automation.customer.one@yopmail.com');
 		$I->wait(5);
-		$I->scrollTo('#payment > ul > li.wc_payment_method.payment_method_paypal > label > img'); //Clicking the WC Vendors Test Gateway for payment.
-		$I->executeJS('document.querySelector("#payment > ul > li.wc_payment_method.payment_method_wcvendors_test_gateway > label").click()');
-		$I->waitForText('This is a test gateway — not to be used on live sites for live transactions. Click here to visit WCVendors.com.', 20);//Make sure that the test gateway is set correct.
-		$I->executeJS('document.querySelector("#place_order").click()');
+		$I->scrollTo('#payment > ul > li.wc_payment_method.payment_method_wcvendors_test_gateway > label'); //Clicking the WC Vendors Test Gateway for payment.
+        $I->executeJS('document.querySelector("#payment > ul > li.wc_payment_method.payment_method_wcvendors_test_gateway > label").click()');
+        $I->waitForText('This is a test gateway — not to be used on live sites for live transactions. Click here to visit WCVendors.com.', 20);//Make sure that the test gateway is set correct.
+        $I->executeJS('document.querySelector("#place_order").click()');
 		$I->waitForText('Order received', 300);
 		$I->see('Thank you. Your order has been received.');
 		$I->scrollTo('#post-8 > div > div > div > ul > li.woocommerce-order-overview__email.email');
-		$I->see('automation.customer.one@yopmail.com');
+		$I->see('automation.customer.one@yopmail.com'); 
 		$I->amOnPage('/my-account');//Navigation to accounts page to log out.
-		$I->click('Log out');
+		$I->click('Log out'); 
 		//Product purchased by the customer
 		//Loggin in as Admin to complete the purchase.
 		//$I->amOnPage('/my-account');//Navigation to accounts page to log out.
@@ -85,7 +84,7 @@ class DownloadableproductadditionCest
 		$I->fillField('#post-search-input', 'ADP 1');//searching for the product added by vendor.
 		$I->pressKey('#post-search-input', \Facebook\WebDriver\WebDriverKeys::ENTER);
 		$I->wait(3);
-		$I->executeJS('document.querySelector("#cb-select-345").click()');
+		$I->click('//*[@name="post[]"][1]');
 		$I->click('#bulk-action-selector-top');
 		$I->wait(2);
 		$I->click('#bulk-action-selector-top > option:nth-child(6)');

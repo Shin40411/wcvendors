@@ -7,7 +7,7 @@ class VirtualproductadditionCest
         $I->amOnPage('/');
 		$I->click('My account');
 		$I->fillField('#username', 'vendor1');
-		$I->fillField('#password', '#*mr4Xk)R2l)W^XuI^P*85jP');
+		$I->fillField('#password', '#*mr4Xk)R2l)W^XuI^P85jP');
 		$I->click('Log in');
     }
 
@@ -20,7 +20,7 @@ class VirtualproductadditionCest
 		$I->fillField('#title', 'AVP1');
 		$I->click('#in-product_cat-15'); //Adding uncategorized category for automation.
 		$I->fillField('#_regular_price', '233');//Setting the price for automated product.
-		$I->scrollTo('#wp-word-count');
+		$I->scrollTo('#product_catdiv > div.postbox-header > h2');
 		$I->click("//*[@id='_virtual']"); //Setting the product to be virtual
 		$I->wait(4);
 		$I->dontSee('Shipping');
@@ -28,6 +28,8 @@ class VirtualproductadditionCest
 		$I->doubleClick('#publish');
 		$I->scrollTo('#wpbody-content > div.wrap > h1');
 		$I->see('Product published. View Product');
+		//$I->executeJS('document.querySelector("#show-settings-link").scrollIntoView()');
+		$I->executeJS('window.scrollTo(0, 0)');
 		$I->click('View Product');
 		$I->see('AVP1');
 		//Logging out as Vendor and logging in as Customer to place order.
@@ -58,7 +60,7 @@ class VirtualproductadditionCest
 		$I->scrollTo('#billing_email');
 		$I->fillField('#billing_email', 'automation.customer.one@yopmail.com');
 		$I->wait(5);
-		$I->scrollTo('#payment > ul > li.wc_payment_method.payment_method_paypal > label > img'); //Clicking the WC Vendors Test Gateway for payment.
+		$I->scrollTo('#payment > ul > li.wc_payment_method.payment_method_wcvendors_test_gateway > label'); //Clicking the WC Vendors Test Gateway for payment.
 		$I->executeJS('document.querySelector("#payment > ul > li.wc_payment_method.payment_method_wcvendors_test_gateway > label").click()');
 		$I->waitForText('This is a test gateway — not to be used on live sites for live transactions. Click here to visit WCVendors.com.', 20);//Make sure that the test gateway is set correct.
 		$I->executeJS('document.querySelector("#place_order").click()');

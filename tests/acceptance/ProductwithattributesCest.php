@@ -8,7 +8,7 @@ class ProductwithattributesCest
         $I->see('wcvendors');
 		$I->click('My account');
 		$I->fillField('#username', 'vendor1');
-		$I->fillField('#password', '#*mr4Xk)R2l)W^XuI^P*85jP');
+		$I->fillField('#password', '#*mr4Xk)R2l)W^XuI^P85jP');
 		$I->click('Log in');
     }
 
@@ -37,10 +37,11 @@ class ProductwithattributesCest
 		$I->click('#select2-upsell_ids-results > li:nth-child(1)');
 		$I->scrollTo('#title');
 		$I->doubleClick('#publish');
-		$I->scrollTo('#title');
+		$I->executeJS('window.scrollTo(0, 0)');
 		$I->doubleClick('#publish');
 		$I->scrollTo('#wpbody-content > div.wrap > h1');
 		$I->see('Product published. View Product');
+		$I->executeJS('window.scrollTo(0, 0)');
 		$I->click('View Product');
 		$I->see('AttributesP1');
     }

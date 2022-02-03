@@ -8,7 +8,7 @@ class ExternalaffiliateproductCest
         $I->see('wcvendors');
 		$I->click('My account');
 		$I->fillField('#username', 'vendor1');
-		$I->fillField('#password', '#*mr4Xk)R2l)W^XuI^P*85jP');
+		$I->fillField('#password', '#*mr4Xk)R2l)W^XuI^P85jP');
 		$I->click('Log in');		
     }
 
@@ -27,9 +27,10 @@ class ExternalaffiliateproductCest
 		$I->fillField('#_product_url', 'http://localhost/wordpress/product/external-affiliate-product-for-automation/'); //ATM it is redirected to product added to locally.
 		$I->fillField('#_button_text', 'External Product');
 		$I->fillField('#_regular_price', '410');
-		$I->scrollTo('#show-settings-link');
+		$I->executeJS('window.scrollTo(0, 0)');
 		$I->doubleClick('#publish');
 		$I->waitForText('Product published. View Product', 300);
+		$I->executeJS('window.scrollTo(0, 0)');
 		$I->click('View Product');
 		$I->see('XP1');
 		$I->amOnPage('/my-account');
