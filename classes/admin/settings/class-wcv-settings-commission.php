@@ -76,6 +76,13 @@ if ( ! class_exists( 'WCVendors_Settings_Commission', false ) ) :
 							'type'    => 'number',
 						),
 						array(
+							'title'   => __( 'Log All Commissions', 'wc-vendors' ), 
+							'desc'    => sprintf( __( 'Log marketplace commissions as well as the %s commissions.', 'wc-vendors'), wcv_get_vendor_name( false, false ) ), 
+							'id'      => 'wcvendors_log_all_commissions',
+							'default' => 'no',
+							'type'    => 'checkbox',
+						),
+						array(
 							'type' => 'sectionend',
 							'id'   => 'commission_options',
 						),

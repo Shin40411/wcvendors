@@ -137,10 +137,9 @@ class WCV_Commission {
 	 */
 	public static function log_commission_due( $order_id ) {
 
-		global $woocommerce;
-
 		$order = wc_get_order( $order_id );
 		$dues  = WCV_Vendors::get_vendor_dues_from_order( $order, false );
+		$log_all_commissions = get_option( 'wcvendors_log_all_commissions', false );
 
 		foreach ( $dues as $vendor_id => $details ) {
 
@@ -149,6 +148,10 @@ class WCV_Commission {
 			// if ( ! WCV_Vendors::is_vendor( $vendor_id ) ) {
 			// 	continue;
 			// }
+
+			if ( ! $log_all_commissions ){ 
+				continue;
+			}
 
 			// See if they currently have an amount due
 			$due = WCV_Vendors::count_due_by_vendor( $vendor_id, $order_id );
