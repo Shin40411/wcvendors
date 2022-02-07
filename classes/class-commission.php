@@ -138,7 +138,7 @@ class WCV_Commission {
 	public static function log_commission_due( $order_id ) {
 
 		$order = wc_get_order( $order_id );
-		$dues  = WCV_Vendors::get_vendor_dues_from_order( $order, false );
+		$dues  = WCV_Vendors::get_vendor_dues_from_order( $order, true );
 		$log_all_commissions = get_option( 'wcvendors_log_all_commissions', false );
 
 		foreach ( $dues as $vendor_id => $details ) {
