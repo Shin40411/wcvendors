@@ -139,7 +139,7 @@ class WCV_Commission {
 
 		$order = wc_get_order( $order_id );
 		$dues  = WCV_Vendors::get_vendor_dues_from_order( $order, false );
-		$log_all_commissions = get_option( 'wcvendors_log_all_commissions', true );
+		$log_all_commissions = wc_string_to_bool( get_option( 'wcvendors_log_all_commissions', true ) );
 
 		foreach ( $dues as $vendor_id => $details ) {
 
