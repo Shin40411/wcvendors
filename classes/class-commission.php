@@ -149,7 +149,7 @@ class WCV_Commission {
 			// 	continue;
 			// }
 
-			if ( ! $log_all_commissions ){ 
+			if ( ! $log_all_commissions && ! WCV_Vendors::is_vendor( $vendor_id ) ) {
 				continue;
 			}
 
